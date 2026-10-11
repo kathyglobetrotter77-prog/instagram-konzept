@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-Konzept Schachverein</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #1a1a1a;
+            --primary-white: #ffffff;
+            --accent-gold: #d4af37;
+            --accent-blue: #2563eb;
+            --gray-light: #f3f4f6;
+            --gray-dark: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-black);
+            background: var(--primary-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cover Page */
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-black) 0%, #2d2d2d 100%);
+            color: var(--primary-white);
+            text-align: center;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-gold);
+            opacity: 0.1;
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-blue);
+            opacity: 0.1;
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .logo {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        .cover h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .cover h2 {
+            font-size: 1.8em;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            font-weight: 400;
+            z-index: 1;
+        }
+
+        .cover .subtitle {
+            font-size: 1.2em;
+            color: #e5e7eb;
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .cover .tagline {
+            margin-top: 40px;
+            padding: 15px 30px;
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        /* Content Sections */
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            page-break-inside: avoid;
+        }
+
+        .section-alt {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: var(--primary-black);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: var(--accent-blue);
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            font-size: 1.4em;
+            color: var(--primary-black);
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1e40af 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .summary-box h3 {
+            color: white;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .summary-item strong {
+            display: block;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        /* Content Lists */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .content-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .content-card h4 {
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        .content-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-card li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+        }
+
+        .content-card li:before {
+            content: "♟";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 1.2em;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: var(--primary-black);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tbody tr:hover {
+            background: var(--gray-light);
+        }
+
+        /* Highlight Boxes */
+        .highlight {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left: 5px solid var(--accent-gold);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-blue {
+            background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%);
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .highlight-queen {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-left: 5px solid #ec4899;
+        }
+
+        .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        /* Lists */
+        ul.styled-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.styled-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        ul.styled-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        /* Stats/Numbers */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--accent-gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: var(--gray-dark);
+            margin-top: 10px;
+        }
+
+        /* Print Styles */
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .section {
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 20px 0;
+            }
+
+            .cover {
+                page-break-after: always;
+                height: 100vh;
+            }
+
+            .content-card {
+                page-break-inside: avoid;
+            }
+
+            .content-grid {
+                page-break-inside: auto;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            h3 {
+                page-break-after: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            /* Prevent orphans and widows */
+            p, li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            /* Hide unnecessary elements in print */
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 2.5em;
+            }
+
+            .cover h2 {
+                font-size: 1.4em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--accent-gold);
+            color: var(--primary-black);
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .badge-blue {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .hashtags {
+            background: var(--gray-light);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: var(--accent-blue);
+            margin: 10px 0;
+        }
+
+        /* Manual page breaks */
+        .page-break {
+            page-break-after: always;
+        }
+
+        .page-break-before {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="cover">
+        <img src="IMG-20261009-WA0006.jpg" alt="Schachverein Logo" class="logo">
+        <h1>Instagram-Konzept</h1>
+        <h2>Social Media Strategie für den Schachverein</h2>
+        <p class="subtitle">
+            Professioneller Instagram-Auftritt mit minimalem Zeitaufwand<br>
+            <strong>Von 6 bis 66+ | Besondere Stärke: Mädchenschach 👑</strong>
+        </p>
+        <div class="tagline">Ehrenamtlich umsetzbar • 0€ Kosten • 1-2h/Woche</div>
+    </div>
+
+    <div class="container">
+
+        <!-- ZUSAMMENFASSUNG -->
+        <div class="section">
+            <div class="summary-box">
+                <h3><span class="emoji">📋</span>Zusammenfassung auf einen Blick</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <strong>Ziel</strong>
+                        Professioneller Instagram-Auftritt
+                    </div>
+                    <div class="summary-item">
+                        <strong>Zielgruppe</strong>
+                        Kinder bis Erwachsene
+                    </div>
+                    <div class="summary-item">
+                        <strong>Zeitaufwand</strong>
+                        1-2 Stunden/Woche
+                    </div>
+                    <div class="summary-item">
+                        <strong>Frequenz</strong>
+                        1-2 Posts/Woche
+                    </div>
+                    <div class="summary-item">
+                        <strong>Kosten</strong>
+                        0€ (alle Tools kostenlos!)
+                    </div>
+                    <div class="summary-item">
+                        <strong>USP</strong>
+                        Mädchenschach 👑
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZIELE -->
+        <div class="section section-alt">
+            <h2><span class="emoji">🎯</span>Ziele</h2>
+
+            <h3>Hauptziele</h3>
+            <ul class="styled-list">
+                <li><strong>Sichtbarkeit erhöhen:</strong> Verein bekannter machen</li>
+                <li><strong>Neue Mitglieder gewinnen:</strong> Besonders Mädchen ansprechen</li>
+                <li><strong>Community aufbauen:</strong> Mitglieder & Eltern einbinden</li>
+                <li><strong>Vereinsleben zeigen:</strong> Authentische Einblicke</li>
+            </ul>
+
+            <h3>Messbare Ziele (Jahr 1)</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">200-500</span>
+                    <span class="stat-label">Follower</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">5-10</span>
+                    <span class="stat-label">Neue Anmeldungen</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Regelmäßige Interaktion</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALLEINSTELLUNGSMERKMALE -->
+        <div class="section">
+            <h2><span class="emoji">💡</span>Unsere Alleinstellungsmerkmale (USP)</h2>
+
+            <div class="highlight-queen">
+                <h3><span class="emoji">👑</span>1. Mädchenschach (Hauptfokus!)</h3>
+
+                <h4>Warum das wichtig ist:</h4>
+                <ul class="styled-list">
+                    <li>Nur wenige Vereine haben starkes Mädchen-Programm</li>
+                    <li>Medial sehr interessant (Presse, Reichweite)</li>
+                    <li>Passt zu aktuellen Trends (Empowerment, Diversity)</li>
+                    <li>Deutsche Schachjugend bietet Förderprogramme!</li>
+                </ul>
+
+                <h4>Wie wir das nutzen:</h4>
+                <ul class="styled-list">
+                    <li>Eigene Content-Kategorie "Chess Queens"</li>
+                    <li>Mindestens 1x alle 2 Wochen Mädchenschach-Post</li>
+                    <li>Eigenes Instagram-Highlight "Mädchenschach"</li>
+                    <li>Spezielle Hashtags: #GirlsInChess #ChessQueens #Mädchenschach</li>
+                </ul>
+            </div>
+
+            <div class="highlight-blue">
+                <h4><span class="emoji">👨‍👩‍👧‍👦</span>2. Generationenübergreifend</h4>
+                <p><strong>Von 6 bis 66+</strong> – Content für alle Altersgruppen, familienfreundlich, inklusive Atmosphäre</p>
+            </div>
+
+            <div class="highlight">
+                <h4><span class="emoji">📍</span>3. Lokaler Bezug</h4>
+                <p>Stadtteil/Region betonen, lokale Events, Community-Gefühl</p>
+            </div>
+        </div>
+
+        <!-- CONTENT STRATEGIE -->
+        <div class="section section-alt">
+            <h2><span class="emoji">📱</span>Content-Strategie & Ideen</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                <strong>Über 100 verschiedene Content-Ideen!</strong>
+            </p>
+
+            <h3><span class="emoji">👑</span>1. Mädchenschach-Content (Unsere Stärke!)</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Empowerment & Vorbilder</h4>
+                    <ul>
+                        <li>"Queen of the Week" - Spotlight</li>
+                        <li>"Women in Chess" - Berühmte Spielerinnen
+                            <ul style="margin-left: 20px; font-size: 0.9em;">
+                                <li>Judit Polgár</li>
+                                <li>Hou Yifan</li>
+                                <li>Nona Gaprindashvili</li>
+                                <li>Alexandra Kosteniuk</li>
+                            </ul>
+                        </li>
+                        <li>"Breaking Barriers"</li>
+                        <li>Inspirierende Zitate</li>
+                        <li>Erfolgsgeschichten</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Fakten & Aufklärung</h4>
+                    <ul>
+                        <li>Mythen widerlegen</li>
+                        <li>Statistik-Posts</li>
+                        <li>Vorteile für Mädchen</li>
+                        <li>Wissenschaftliche Facts</li>
+                        <li>Gender Gap schließen</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Spezielle Mädchen-Events</h4>
+                    <ul>
+                        <li>Girls' Chess Day</li>
+                        <li>Mädchen-Turniere</li>
+                        <li>Mama-Tochter-Abende</li>
+                        <li>Mentoring-Programm</li>
+                        <li>Kooperationen (Deutsche Schachjugend)</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Community Building</h4>
+                    <ul>
+                        <li>Mädchen-Squad Gruppenfoto</li>
+                        <li>Interview-Reihe</li>
+                        <li>Role Models</li>
+                        <li>Support-Kultur</li>
+                        <li>"Bring a friend"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hashtags">
+                #Mädchenschach #GirlsInChess #ChessQueens #WomenInChess #GirlPower #ChessGirls #FemaleChess #QueensOfChess
+            </div>
+        </div>
+
+        <!-- KINDER CONTENT (Neue Seite) -->
+        <div class="section">
+            <h3><span class="emoji">👶</span>2. Kinder-Content (6-12 Jahre)</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Lehrreich & Interaktiv</h4>
+                    <ul>
+                        <li>"Zug der Woche"</li>
+                        <li>"Matt in 2/3 Zügen"</li>
+                        <li>Quiz in Stories</li>
+                        <li>Schach-ABC (26 Buchstaben = 6 Monate Content!)</li>
+                        <li>Tipps für Anfänger</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Kreatives</h4>
+                    <ul>
+                        <li>Kinder malen Schachfiguren</li>
+                        <li>Schachbrett-Variationen</li>
+                        <li>DIY-Ideen</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Community & Emotionen</h4>
+                    <ul>
+                        <li>"Nachwuchsspieler des Monats"</li>
+                        <li>Erfolgsgeschichten</li>
+                        <li>Teamfotos</li>
+                        <li>Geburtstage</li>
+                        <li>Vorher/Nachher</li>
+                        <li>Eltern-Stimmen</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERWACHSENEN CONTENT (Neue Seite) -->
+        <div class="section">
+            <h3><span class="emoji">🎓</span>3. Erwachsenen-Content</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Anspruchsvoller Content</h4>
+                    <ul>
+                        <li>Tiefere Analysen</li>
+                        <li>Profi-Partien</li>
+                        <li>Strategische Konzepte</li>
+                        <li>Schachpsychologie</li>
+                        <li>Vereinsmeisterschaft</li>
+                        <li>Schach-Historie</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Erwachsenen-spezifisch</h4>
+                    <ul>
+                        <li>Schach nach Feierabend</li>
+                        <li>Social Chess</li>
+                        <li>Schach & Beruf</li>
+                        <li>"Nie zu spät!"</li>
+                        <li>Geistig fit bleiben</li>
+                        <li>Generationen-Schach</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Community-Events</h4>
+                    <ul>
+                        <li>Schach & Café</li>
+                        <li>Simultanschach</li>
+                        <li>Vereinsmeisterschaft</li>
+                        <li>Stammtisch</li>
+                        <li>Schach-Lectures</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERAKTIV & UNTERHALTSAM (Neue Seite) -->
+        <div class="section">
+            <h3><span class="emoji">🎭</span>4. Interaktiv & Unterhaltsam (für alle)</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Unterhaltsames</h4>
+                    <ul>
+                        <li>Schachmemes</li>
+                        <li>"Schach in Filmen"</li>
+                        <li>Berühmte Schachspieler</li>
+                        <li>Schachrekorde</li>
+                        <li>Behind the Scenes</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Informativ & Wertvoll</h4>
+                    <ul>
+                        <li>Mythen entlarven</li>
+                        <li>Vorteile von Schach</li>
+                        <li>FAQ-Reihe</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><span class="emoji">🗓️</span>5. Wiederkehrende Formate</h3>
+
+            <div class="highlight">
+                <p><strong>Regelmäßigkeit schafft Erwartung & Wiedererkennung!</strong></p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div>📅 <strong>Motivation Monday</strong></div>
+                    <div>🧩 <strong>Taktik-Dienstag</strong></div>
+                    <div>😄 <strong>Witze-Mittwoch</strong></div>
+                    <div>📸 <strong>Throwback Thursday</strong></div>
+                    <div>💡 <strong>Fun-Fact Friday</strong></div>
+                    <div>♟️ <strong>Spiel-Samstag</strong></div>
+                    <div>🎯 <strong>Sonntags-Rätsel</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZIELGRUPPEN-VERTEILUNG -->
+        <div class="section">
+            <h2><span class="emoji">📊</span>Zielgruppen-Verteilung</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Content-Typ</th>
+                        <th>Zielgruppe</th>
+                        <th>Empfohlene Häufigkeit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kinder-Rätsel, Basteln</td>
+                        <td>👶 6-12 Jahre</td>
+                        <td>Jede 2. Woche</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mädchen-Empowerment</strong></td>
+                        <td>👑 Mädchen 8-16 Jahre</td>
+                        <td><strong>Jede 2. Woche</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Jugend-Turniere</td>
+                        <td>🎯 Jugendliche 12-18</td>
+                        <td>1x/Monat</td>
+                    </tr>
+                    <tr>
+                        <td>Anspruchsvolle Analysen</td>
+                        <td>🎓 Erwachsene</td>
+                        <td>1x/Monat</td>
+                    </tr>
+                    <tr>
+                        <td>Community/Events</td>
+                        <td>👨‍👩‍👧‍👦 Alle</td>
+                        <td>1x/Monat</td>
+                    </tr>
+                    <tr>
+                        <td>Witze/Memes</td>
+                        <td>🌟 Alle</td>
+                        <td>1x/Monat</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <strong>Goldene Regel:</strong>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>80% Mehrwert:</strong> Unterhaltsam, lehrreich, inspirierend</li>
+                    <li>✅ <strong>20% Werbung:</strong> Anmeldungen, Events, Mitgliedschaft</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- POSTING-STRATEGIE -->
+        <div class="section section-alt">
+            <h2><span class="emoji">📅</span>Posting-Strategie</h2>
+
+            <h3>Frequenz (Realistisch für Ehrenamt)</h3>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Start: 1 Post/Woche</h4>
+                    <ul>
+                        <li>Jeden <strong>Mittwoch 12:00 Uhr</strong></li>
+                        <li>Regelmäßigkeit wichtiger als Menge</li>
+                        <li>Zeitaufwand: 30-60 Min/Woche</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Optional: 2 Posts/Woche</h4>
+                    <ul>
+                        <li>Mittwoch 12:00 + Donnerstag 9:00</li>
+                        <li>Nur wenn zeitlich machbar</li>
+                        <li>Zeitaufwand: 1-1.5h/Woche</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Stories</h4>
+                    <ul>
+                        <li>Nur spontan</li>
+                        <li>Wenn etwas passiert</li>
+                        <li>Kein Zwang, kein Stress</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Beste Posting-Zeiten (Daten 2026)</h3>
+            <div class="highlight-blue">
+                <strong>Top-Zeiten:</strong>
+                <ul>
+                    <li>🥇 Mittwoch: 12:00 Uhr oder 18:00 Uhr</li>
+                    <li>🥈 Donnerstag: 9:00 Uhr</li>
+                    <li>🥉 Dienstag: 13:00-19:00 Uhr</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>⚠️ Vermeiden:</strong> Freitag & Samstag (niedriges Engagement)</p>
+            </div>
+
+            <h3>4-Wochen-Rotation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Woche</th>
+                        <th>Thema</th>
+                        <th>Emoji</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Woche 1</td>
+                        <td><strong>Mädchenschach-Post</strong></td>
+                        <td>👑</td>
+                    </tr>
+                    <tr>
+                        <td>Woche 2</td>
+                        <td>Kinder-/Lern-Post</td>
+                        <td>👶</td>
+                    </tr>
+                    <tr>
+                        <td>Woche 3</td>
+                        <td>Interaktiv (Witz/Motivation)</td>
+                        <td>🎭</td>
+                    </tr>
+                    <tr>
+                        <td>Woche 4</td>
+                        <td>Info/Event</td>
+                        <td>📍</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="text-align: center; margin-top: 15px; font-style: italic;">
+                → Dann wiederholen (mit neuen Inhalten)
+            </p>
+        </div>
+
+        <!-- TOOLS & RESSOURCEN -->
+        <div class="section">
+            <h2><span class="emoji">🛠️</span>Tools & Ressourcen (ALLES KOSTENLOS!)</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Design: Canva</h4>
+                    <ul>
+                        <li>www.canva.com</li>
+                        <li><strong>Kostenlos für Vereine!</strong></li>
+                        <li>Drag-and-Drop, sehr einfach</li>
+                        <li>Tausende Templates</li>
+                        <li>Team-Zugang möglich</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Planung: Meta Business Suite</h4>
+                    <ul>
+                        <li>business.facebook.com</li>
+                        <li>Direkt von Instagram/Meta</li>
+                        <li>Posts im Voraus planen</li>
+                        <li>Automatische Veröffentlichung</li>
+                        <li>Statistiken & Insights</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Fotos: Eigene + Stock</h4>
+                    <ul>
+                        <li><strong>Eigene Fotos</strong> (wichtigste Quelle!)</li>
+                        <li>Unsplash.com</li>
+                        <li>Pexels.com</li>
+                        <li>⚠️ Einwilligungen einholen!</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Schach-Grafiken</h4>
+                    <ul>
+                        <li>Lichess.org/editor</li>
+                        <li>Für Rätsel & Taktik-Posts</li>
+                        <li>Flaticon.com (Icons)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h4>Zeitersparnis durch:</h4>
+                <ul>
+                    <li>✅ Templates (5 Min statt 30 Min pro Post)</li>
+                    <li>✅ Automatisierung (Meta Business Suite)</li>
+                    <li>✅ Vorgefertigte Hashtag-Sets</li>
+                    <li>✅ Batch-Produktion (alles auf einmal)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ZEITAUFWAND -->
+        <div class="section section-alt">
+            <h2><span class="emoji">⏰</span>Zeitaufwand</h2>
+
+            <h3>Einmalig (Setup)</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number">30 Min</span>
+                    <span class="stat-label">Instagram-Account</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">1-2h</span>
+                    <span class="stat-label">Canva-Templates</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">30 Min</span>
+                    <span class="stat-label">Meta Business Suite</span>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <strong>Gesamt: 2-3 Stunden</strong> (kann auf 2 Wochen verteilt werden)
+            </p>
+
+            <h3>Wöchentlich (laufend)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aktivität</th>
+                        <th>1 Post/Woche</th>
+                        <th>2 Posts/Woche</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Content erstellen & planen</td>
+                        <td>30-60 Min (1x/Woche)</td>
+                        <td>60-90 Min (1x/Woche)</td>
+                    </tr>
+                    <tr>
+                        <td>Kommentare beantworten</td>
+                        <td>15-30 Min (3x 5-10 Min)</td>
+                        <td>15-30 Min (3x 5-10 Min)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gesamt</strong></td>
+                        <td><strong>1-1.5 Stunden/Woche</strong></td>
+                        <td><strong>1.5-2 Stunden/Woche</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- RECHTLICHES -->
+        <div class="section">
+            <h2><span class="emoji">⚖️</span>Rechtliches & Datenschutz</h2>
+
+            <div class="highlight" style="background: #fee2e2; border-left-color: #dc2626;">
+                <h4>⚠️ WICHTIG: Einwilligungserklärung</h4>
+                <p><strong>Für Fotos von Kindern ZWINGEND nötig!</strong></p>
+                <div style="background: white; padding: 15px; border-radius: 5px; margin-top: 15px;">
+                    <p style="font-family: monospace; font-size: 0.9em;">
+                        Ich, [Name], erteile dem Schachverein [Name] die Erlaubnis,<br>
+                        Fotos/Videos meines Kindes [Name] auf Instagram (@username)<br>
+                        zu veröffentlichen.<br><br>
+                        Die Bilder dienen der Öffentlichkeitsarbeit des Vereins.<br><br>
+                        ☐ Ja, ich erlaube die Veröffentlichung<br>
+                        ☐ Nein, ich erlaube keine Veröffentlichung<br><br>
+                        Datum: _________ Unterschrift: _________________
+                    </p>
+                </div>
+            </div>
+
+            <h3>Wichtige Regeln</h3>
+            <div class="content-grid">
+                <div class="content-card" style="border-left-color: #dc2626;">
+                    <h4>❌ NIEMALS</h4>
+                    <ul>
+                        <li>Volle Namen + Foto kombinieren</li>
+                        <li>Adressdaten oder Schulinfos</li>
+                        <li>Fotos ohne Einwilligung</li>
+                    </ul>
+                </div>
+
+                <div class="content-card" style="border-left-color: #16a34a;">
+                    <h4>✅ IMMER</h4>
+                    <ul>
+                        <li>Nur Vornamen verwenden</li>
+                        <li>Liste führen: Wer darf gezeigt werden?</li>
+                        <li>Im Zweifel: Fotos von hinten/seitlich</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERFOLGSMESSUNG -->
+        <div class="section section-alt">
+            <h2><span class="emoji">📈</span>Erfolgsmessung</h2>
+
+            <h3>Realistische Erwartungen (1 Post/Woche)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zeitraum</th>
+                        <th>Follower</th>
+                        <th>Likes/Post</th>
+                        <th>Anmeldungen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nach 3 Monaten</td>
+                        <td>50-100</td>
+                        <td>10-30</td>
+                        <td>1-2</td>
+                    </tr>
+                    <tr>
+                        <td>Nach 1 Jahr</td>
+                        <td>200-500</td>
+                        <td>30-80</td>
+                        <td>5-10</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-blue">
+                <h4>WICHTIG: Qualität > Quantität!</h4>
+                <p>Besser 100 engagierte Follower als 1000 passive.</p>
+            </div>
+        </div>
+
+        <!-- VORTEILE -->
+        <div class="section">
+            <h2><span class="emoji">✅</span>Vorteile für den Verein</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Mitglieder-Gewinnung</h4>
+                    <ul>
+                        <li>Jüngere Zielgruppe erreichen</li>
+                        <li>Besonders Mädchen ansprechen</li>
+                        <li>Lokale Sichtbarkeit erhöhen</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Image</h4>
+                    <ul>
+                        <li>Modern & zeitgemäß auftreten</li>
+                        <li>Professioneller Eindruck</li>
+                        <li>Als "Mädchenschach-Verein" positionieren</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Community</h4>
+                    <ul>
+                        <li>Mitglieder & Eltern einbinden</li>
+                        <li>Erfolge teilen (Motivation!)</li>
+                        <li>Vereinsleben zeigen</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Marketing</h4>
+                    <ul>
+                        <li>Events bewerben</li>
+                        <li>Schnuppertraining kommunizieren</li>
+                        <li>Presse auf uns aufmerksam machen</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- UMSETZUNGSPLAN -->
+        <div class="section section-alt">
+            <h2><span class="emoji">🚀</span>Umsetzungsplan</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Phase 1: Setup (Woche 0-2)</h4>
+                    <ul>
+                        <li>Instagram Business-Account erstellen</li>
+                        <li>Meta Business Suite verknüpfen</li>
+                        <li>Canva-Account erstellen</li>
+                        <li>3 Basis-Templates erstellen</li>
+                        <li>Einwilligungserklärungen vorbereiten</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Phase 2: Launch (Woche 3-6)</h4>
+                    <ul>
+                        <li>Erster Post: Account-Vorstellung</li>
+                        <li>1 Post/Woche nach Plan</li>
+                        <li>Routine entwickeln</li>
+                        <li>Feedback sammeln</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Phase 3: Optimierung (Ab Woche 7)</h4>
+                    <ul>
+                        <li>Statistiken auswerten</li>
+                        <li>Was funktioniert? Mehr davon!</li>
+                        <li>Eventuell auf 2 Posts/Woche steigern</li>
+                        <li>Community weiter aufbauen</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Phase 4: Wachstum (Ab Monat 4)</h4>
+                    <ul>
+                        <li>Reels einführen (optional)</li>
+                        <li>Kooperationen mit anderen Vereinen</li>
+                        <li>Events verstärkt bewerben</li>
+                        <li>Presse kontaktieren (Mädchenschach!)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- KOSTEN -->
+        <div class="section">
+            <h2><span class="emoji">💰</span>Kosten</h2>
+
+            <div class="summary-box" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
+                <h3 style="text-align: center; font-size: 2.5em; border: none;">
+                    GESAMT: 0€
+                </h3>
+                <p style="text-align: center; font-size: 1.2em; margin-top: 10px;">
+                    Alle notwendigen Tools sind kostenlos!
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <strong>Instagram-Account</strong><br>
+                        <span style="color: var(--accent-gold);">0€</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <strong>Meta Business Suite</strong><br>
+                        <span style="color: var(--accent-gold);">0€</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <strong>Canva (für Vereine)</strong><br>
+                        <span style="color: var(--accent-gold);">0€</span> statt 109€/Jahr
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                        <strong>Stockfotos</strong><br>
+                        <span style="color: var(--accent-gold);">0€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERFOLGSFAKTOREN -->
+        <div class="section section-alt">
+            <h2><span class="emoji">🎯</span>Die 5 Säulen des Erfolgs</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>1. Regelmäßigkeit</h4>
+                    <p>Besser 1x/Woche zuverlässig als 5x sporadisch. Follower gewöhnen sich an feste Zeiten.</p>
+                </div>
+
+                <div class="content-card">
+                    <h4>2. Authentizität</h4>
+                    <p>Echte Fotos vom Verein, ehrliche Einblicke, Persönlichkeit zeigen.</p>
+                </div>
+
+                <div class="content-card">
+                    <h4>3. Mädchenschach-USP nutzen</h4>
+                    <p>Das unterscheidet uns! Mediale Aufmerksamkeit, zieht neue Zielgruppe an.</p>
+                </div>
+
+                <div class="content-card">
+                    <h4>4. Community-Interaktion</h4>
+                    <p>Kommentare beantworten, Fragen stellen, Dialog fördern.</p>
+                </div>
+
+                <div class="content-card">
+                    <h4>5. Geduld & Durchhaltevermögen</h4>
+                    <p>Erfolg braucht Zeit (3-6 Monate). Nicht aufgeben! Kontinuität zahlt sich aus.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAZIT -->
+        <div class="section">
+            <h2><span class="emoji">🎉</span>Fazit</h2>
+
+            <div class="summary-box">
+                <h3>Warum Instagram für unseren Verein?</h3>
+                <ul class="styled-list" style="color: white;">
+                    <li><strong>Erreicht junge Familien</strong> (unsere Zielgruppe!)</li>
+                    <li><strong>Kostenlos & professionell</strong> (0€ Budget nötig)</li>
+                    <li><strong>Zeitlich machbar</strong> (1-2h/Woche)</li>
+                    <li><strong>Nutzt unser USP</strong> (Mädchenschach!)</li>
+                    <li><strong>Modernes Image</strong> (zukunftsorientierter Verein)</li>
+                    <li><strong>Messbare Erfolge</strong> (Statistiken)</li>
+                </ul>
+            </div>
+
+            <h3>Das brauchen wir:</h3>
+            <div class="content-grid" style="margin-bottom: 30px;">
+                <div class="content-card">
+                    <h4>Ressourcen</h4>
+                    <ul>
+                        <li>1 engagierte Person (Social Media Manager)</li>
+                        <li>1-2 Stunden/Woche Zeit</li>
+                        <li>Unterstützung vom Vorstand</li>
+                        <li>Einwilligungen der Eltern</li>
+                        <li>Geduld & Durchhaltevermögen</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h4>Erwartete Ergebnisse (Jahr 1)</h4>
+                    <ul>
+                        <li>200-500 neue Follower</li>
+                        <li>5-10 neue Mitglieder über Instagram</li>
+                        <li>Stärkere Positionierung als "Mädchenschach-Verein"</li>
+                        <li>Moderne, professionelle Außenwirkung</li>
+                        <li>Engagierte Community</li>
+                        <li>Mediale Aufmerksamkeit (lokale Presse)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 40px; background: var(--gray-light); border-radius: 10px;">
+                <h2 style="border: none; padding: 0; margin-bottom: 20px;">
+                    Lasst uns starten! 🚀👑♟️
+                </h2>
+                <p style="font-size: 1.3em; color: var(--gray-dark);">
+                    Diese Präsentation ist der Startpunkt für eine erfolgreiche Instagram-Strategie.
+                </p>
+                <div style="margin-top: 30px;">
+                    <span class="badge badge-blue">Professionell</span>
+                    <span class="badge">Ehrenamtlich umsetzbar</span>
+                    <span class="badge badge-blue">0€ Kosten</span>
+                    <span class="badge">1-2h/Woche</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 40px 20px; color: var(--gray-dark); border-top: 2px solid var(--gray-light); margin-top: 60px;">
+            <p><strong>Erstellt am:</strong> Oktober 2026</p>
+            <p><strong>Für:</strong> [Vereinsname]</p>
+            <p><strong>Version:</strong> 1.0</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                Bei Fragen oder Anmerkungen wenden Sie sich bitte an den Social Media Manager.
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
